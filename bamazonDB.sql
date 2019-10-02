@@ -1,5 +1,6 @@
-CREATE DATABASE bamazon;
-USE bamazon; 
+DROP DATABASE IF EXISTS bamazon_db;
+CREATE DATABASE bamazon_db;
+USE bamazon_db; 
 CREATE TABLE products(
 	item_id INT(10) AUTO_INCREMENT NOT NULL,
 	product_name VARCHAR(30) NOT NULL,
@@ -21,4 +22,3 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 		('Crinkle Toy', 'pets', 25, 10);
         
         
-SELECT * FROM products

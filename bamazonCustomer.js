@@ -132,7 +132,7 @@ function checker() {
                 connection.query("SELECT item_id, product_name, price FROM products", function (err, result, fields) {
                     if (err) throw err;
                     console.log(result);
-                });
+                })
             // function(error) {
             //     if (error) throw err;
             //     console.log("Thanks for your purchase!");

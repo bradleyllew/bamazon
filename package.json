@@ -1,7 +1,7 @@
 {
   "name": "bamazon",
   "version": "1.0.0",
-  "description": "",
+  "description": "#bamazon is a CLI APP and is an online marketplace mock-up (ie Amazon).  It uses node.js, MySQL, Inquirer npm.",
   "main": "bamazonCustomer.js",
   "dependencies": {
     "inquirer": "^7.0.0",

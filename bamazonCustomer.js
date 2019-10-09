@@ -52,7 +52,7 @@ function buy() {
                 name: "toBuy",
                 type: "rawlist",
                 message: "What would you like to buy for your kitty?",
-                choices: ["Kitty Condo $125", "Catnip Bag(sm) $5", "Catnip Bag(lg) $10", "Catnip Mouse $10", "Cat Bed $40", "Litterbox $7", "Kitty Litter $35", "Cosmic Toy $5", "Jingle Ball $25", "Crinkle Toy $25"]
+                choices: ["Kitty Condo", "Catnip Bag - small", "Catnip Bag - large", "Catnip Mouse", "Cat Bed", "Litterbox", "Kitty Litter", "Cosmic Toy", "Jingle Ball", "Crinkle Toy"]
             },
             {
                 name: "howMany",
@@ -82,22 +82,17 @@ function checker(answer) {
     // if === enough , updates quantity in table and displays -------- needs to show total price
     else if (remainingStock <= 10) {
         console.log("We have " + remainingStock + "_" + answer.toBuy + " left! Thanks for shopping Bamazon!");
-        console.log(choices.id);
+        console.log(choices);
         let purchase = function () {
             // update quantity
             connection.query(
-                "UPDATE products SET ? WHERE ?",
+                "UPDATE products SET stock_quantity=? WHERE product_name=?",
                 [
-                    {
-                        stock_quantity: remainingStock
-                    },
-                    {
-                        product_name: choices.id
-
-                    }
+                    remainingStock, answer.toBuy
                 ],
                 function (err, result) {
                     if (err) throw err;
+                    // console.log('result', result)
                     console.log("RESULTS UPDATED:");
                     connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
                         if (err) throw err;
@@ -118,6 +113,27 @@ function checker(answer) {
 
 // function total () {
 // // for value of price array === to item in choices array???
-//     prices[x] === choices[x]
+//     prices[x] === answer.toBuy
 //     console.log("Your total today is " + (prices[x] * remainingStock));
 // }
+
+// let total = function () {
+//     // update quantity
+//     connection.query(
+//         "UPDATE products SET stock_quantity=? WHERE product_name=?",
+//         [
+//             remainingStock, answer.toBuy
+//         ],
+//         function (err, result) {
+//             if (err) throw err;
+//             // console.log('result', result)
+//             console.log("RESULTS UPDATED:");
+//             connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
+//                 if (err) throw err;
+//                 console.log(result);
+//             });
+//         }
+//     );
+
+
+};

@@ -63,55 +63,61 @@ function buy() {
             console.log(answer)
             howMany = answer.howMany;
             choices = answer.toBuy;
-            checker();
-            // based on their answer, welcome owner & kitty
-            if (answer.username) {
-                console.log(answer.username + " is going to love their new " + answer.toBuy);
-            }
-            // based on their answer, check the stock quantities
-            function checker() {
-                let stock = 10;
-                let remainingStock = (stock - answer.howMany);
-                let totalPrice = ()
-
-                // if ==! enough, log 'Insufficient Quantity In Stock'
-                if (answer.howMany > 10) {
-                    console.log("Sorry, insufficient quantity! Try again?");
-                    // restart the app so user can pick again
-                    buy();
-                }
-                // if === enough , updates quantity in table and displays -------- needs to show total price
-                else if (remainingStock <= 10) {
-                    console.log("We have " + remainingStock + "_" + answer.toBuy + " left! Thanks for shopping Bamazon!");
-                    let purchase = function () {
-                        // update quantity
-                        connection.query(
-                            "UPDATE products SET ? WHERE ?",
-                            [
-                                {
-                                    stock_quantity: remainingStock.id
-                                },
-                                {
-                                    product_name: choices.id
-                                }
-                            ]
-                        );
-                        connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
-                            if (err) throw err;
-                            console.log("RESULTS UPDATED:");
-                            console.log(result);
-                        });
-                        purchase();
-                    };
-                    buy();
-                };
-            };
+            checker(answer);
         });
+};
+// based on their answer, check the stock quantities
+function checker(answer) {
+    let stock = 10;
+    let remainingStock = (stock - answer.howMany);
+    // let totalPrice = ()
 
-}
+    // if ==! enough, log 'Insufficient Quantity In Stock'
+    if (answer.howMany > 10) {
+        console.log("Sorry, insufficient quantity! Try again?");
+        // restart the app so user can pick again
+        buy();
+    }
 
-function total () {
-// for value of price array === to item in choices array???
-    for (prices[x] === choices[x])
-    console.log("Your total today is " + (prices[x] * remainingStock));
-}
+    // if === enough , updates quantity in table and displays -------- needs to show total price
+    else if (remainingStock <= 10) {
+        console.log("We have " + remainingStock + "_" + answer.toBuy + " left! Thanks for shopping Bamazon!");
+        console.log(choices.id);
+        let purchase = function () {
+            // update quantity
+            connection.query(
+                "UPDATE products SET ? WHERE ?",
+                [
+                    {
+                        stock_quantity: remainingStock
+                    },
+                    {
+                        product_name: choices.id
+
+                    }
+                ],
+                function (err, result) {
+                    if (err) throw err;
+                    console.log("RESULTS UPDATED:");
+                    connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
+                        if (err) throw err;
+                        console.log(result);
+                    });
+                }
+            );
+
+
+        };
+        purchase();
+
+    };
+};
+
+
+
+
+// function total () {
+// // for value of price array === to item in choices array???
+//     prices[x] === choices[x]
+//     console.log("Your total today is " + (prices[x] * remainingStock));
+// }

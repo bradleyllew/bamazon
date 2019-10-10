@@ -31,6 +31,8 @@ The app then prompts users with two messages:
 <img width="720" alt="Screen Shot 2019-10-10 at 5 10 17 PM" src="https://user-images.githubusercontent.com/51133387/66607165-a00c9b00-eb81-11e9-81d3-86a3c0757691.png">
 <img width="725" alt="Screen Shot 2019-10-10 at 5 10 35 PM" src="https://user-images.githubusercontent.com/51133387/66607168-a26ef500-eb81-11e9-846e-cb6383766375.png">
 <img width="606" alt="Screen Shot 2019-10-10 at 5 10 56 PM" src="https://user-images.githubusercontent.com/51133387/66607181-aa2e9980-eb81-11e9-8e9a-f4dc5a0b24df.png">
+<img width="404" alt="Screen Shot 2019-10-10 at 5 21 13 PM" src="https://user-images.githubusercontent.com/51133387/66607671-c7b03300-eb82-11e9-9dc3-71b0626788ad.png">
+<img width="459" alt="Screen Shot 2019-10-10 at 5 23 10 PM" src="https://user-images.githubusercontent.com/51133387/66607677-c979f680-eb82-11e9-900b-d9dda06013dd.png">
 
 
 

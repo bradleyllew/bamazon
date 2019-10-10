@@ -2,8 +2,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 
-// setting up the variables
-const prices = [125, 5, 10, 10, 40, 7, 35, 5, 25, 25];
 // var for how many (stock_quantity user wants to buy)
 let howMany = 0;
 // var for user choice of product
@@ -37,10 +35,9 @@ function start() {
         });
     });
 }
-
-
 // asks customer the id of the product wanted and how many of that item
 function buy() {
+    
     inquirer
         .prompt([
             {
@@ -66,11 +63,29 @@ function buy() {
             checker(answer);
         });
 };
+
+
 // based on their answer, check the stock quantities
 function checker(answer) {
     let stock = 10;
     let remainingStock = (stock - answer.howMany);
     // let totalPrice = ()
+    var prices =
+    connection.query(
+        "SELECT price WHERE product_name?",
+        [
+            answer.toBuy
+        ],
+        function (err, result) {
+            if (err) throw err;
+            // console.log('result', result)
+            console.log("result");
+            connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
+                if (err) throw err;
+                console.log(prices);
+            });
+        }
+    );
 
     // if ==! enough, log 'Insufficient Quantity In Stock'
     if (answer.howMany > 10) {
@@ -82,7 +97,7 @@ function checker(answer) {
     // if === enough , updates quantity in table and displays -------- needs to show total price
     else if (remainingStock <= 10) {
         console.log("We have " + remainingStock + "_" + answer.toBuy + " left! Thanks for shopping Bamazon!");
-        console.log(choices);
+        console.table(choices);
         let purchase = function () {
             // update quantity
             connection.query(
@@ -90,10 +105,14 @@ function checker(answer) {
                 [
                     remainingStock, answer.toBuy
                 ],
+                "SELECT price WHERE product_name?",
+                [
+                    answer.toBuy
+                ],
                 function (err, result) {
                     if (err) throw err;
                     // console.log('result', result)
-                    console.log("RESULTS UPDATED:");
+                    console.log("PRICE UPDATED:" + (prices * answer.howMany));
                     connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
                         if (err) throw err;
                         console.log(result);
@@ -106,7 +125,9 @@ function checker(answer) {
         purchase();
 
     };
+
 };
+
 
 
 
@@ -117,23 +138,26 @@ function checker(answer) {
 //     console.log("Your total today is " + (prices[x] * remainingStock));
 // }
 
-// let total = function () {
+// let total = function (answer) {
 //     // update quantity
-//     connection.query(
-//         "UPDATE products SET stock_quantity=? WHERE product_name=?",
-//         [
-//             remainingStock, answer.toBuy
-//         ],
-//         function (err, result) {
-//             if (err) throw err;
-//             // console.log('result', result)
-//             console.log("RESULTS UPDATED:");
-//             connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
+//     var prices =
+//         connection.query(
+//             "SELECT price WHERE product_name?",
+//             [
+//                 answer.toBuy
+//             ],
+//             function (err, result) {
 //                 if (err) throw err;
-//                 console.log(result);
-//             });
-//         }
-//     );
+//                 // console.log('result', result)
+//                 console.log("RESULTS UPDATED:");
+//                 connection.query("SELECT item_id, product_name, stock_quantity FROM products", function (err, result) {
+//                     if (err) throw err;
+//                     console.log(result);
+//                 });
+//             }
+//         );
 
+//     console.log("Your total price today is " + (prices * answer.howMany));
 
-};
+// };
+// total(answer);
